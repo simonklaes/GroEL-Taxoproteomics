@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
-
-
-#This script was developed by Simon Klaes and Lorenz Adrian for GroEL-Taxoproteomics. 
+# This script was developed by Simon Klaes and Lorenz Adrian for GroEL-Taxoproteomics. 
 # If using this script, please cite:
 #-------------------------------------------------------------------------
 # Klaes, S., Madan, S., Deobald, D., Cooper, M., and Adrian, L., 2023. 
