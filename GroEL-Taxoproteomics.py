@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# This script was developed by Simon Klaes and Lorenz Adrian for GroEL-Taxoproteomics. 
+# This script was developed by Simon Klaes and Lorenz Adrian for GroEL-Taxoproteomics and natively uses the collapsed Output from MetaProSIP as input.
+# However, the script can be adapted for other proteins, search engines, and filtering criteria upon request.
 # If using this script, please cite:
 #-------------------------------------------------------------------------
 # Klaes, S., Madan, S., Deobald, D., Cooper, M., and Adrian, L., 2023. 
