@@ -1,0 +1,856 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This workflow has been created for batch processing of mzML files for GroEL-Taxoproteomics and is based on peptide identification by MSGF+ and MetaProSIP. The results of all input mzML files are collapsed into a single tsv-file.",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "",
+            "name": "Lorenz Adrian"
+        },
+        {
+            "class": "Person",
+            "identifier": "",
+            "name": "Simon Klaes"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "GroEL-Taxoproteomics",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Fasta Database"
+                }
+            ],
+            "label": "Fasta Database",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.0,
+                "top": 35.97142146183893
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fasta\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a0f7b16b-ad0b-44a6-a509-4c6b9fab00fe",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "MSGF+ configuration file"
+                }
+            ],
+            "label": "MSGF+ configuration file",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 278.05723382171084,
+                "top": 205.0049460145848
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"txt\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "30904168-dec9-42ef-a16c-b6f5f0968a44",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "mzML input"
+                }
+            ],
+            "label": "mzML input",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 0.0,
+                "top": 873.0029495510124
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\", \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "ad92bdc7-9ad6-4d93-8c49-8175cd4ed567",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_decoydatabase/DecoyDatabase/2.8+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "in_cond|in": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "DecoyDatabase",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 278.05723382171084,
+                "top": 0.0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_decoydatabase/DecoyDatabase/2.8+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "25529df60a81",
+                "name": "openms_decoydatabase",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"Decoy\": {\"non_shuffle_pattern\": \"\", \"keepPeptideNTerm\": \"true\", \"keepPeptideCTerm\": \"true\"}, \"OPTIONAL_OUTPUTS\": null, \"adv_opts\": {\"shuffle_max_attempts\": \"30\", \"shuffle_sequence_identity_threshold\": \"0.5\", \"seed\": \"1\", \"force\": \"false\", \"test\": \"False\"}, \"decoy_string\": \"DECOY_\", \"decoy_string_position\": \"prefix\", \"enzyme\": \"Trypsin\", \"in_cond\": {\"in_select\": \"no\", \"__current_case__\": 0, \"in\": {\"__class__\": \"ConnectedValue\"}}, \"method\": \"reverse\", \"only_decoy\": \"false\", \"type\": \"protein\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8+galaxy0",
+            "type": "tool",
+            "uuid": "dabe45b8-80e4-403d-9800-bbef016fa0ed",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "cfac40d9-4e41-4774-8a6e-1495fc8aceaf"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "__SORTLIST__",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Sort collection",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 278.05723382171084,
+                "top": 846.9674827079094
+            },
+            "post_job_actions": {},
+            "tool_id": "__SORTLIST__",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"sort_type\": {\"sort_type\": \"alpha\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "a2162f66-2837-4d9f-96ac-d8bec81ecb42",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "b24f8949-4a4f-4d8d-800e-7179d8659b7f"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_msgfplusadapter/MSGFPlusAdapter/2.8+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "conf": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "database": {
+                    "id": 3,
+                    "output_name": "out"
+                },
+                "in": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MSGFPlusAdapter",
+                    "name": "conf"
+                },
+                {
+                    "description": "runtime parameter for tool MSGFPlusAdapter",
+                    "name": "database"
+                },
+                {
+                    "description": "runtime parameter for tool MSGFPlusAdapter",
+                    "name": "in"
+                }
+            ],
+            "label": null,
+            "name": "MSGFPlusAdapter",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "idxml"
+                }
+            ],
+            "position": {
+                "left": 555.991110717051,
+                "top": 96.96748270790954
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_msgfplusadapter/MSGFPlusAdapter/2.8+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "f5ec766d80cf",
+                "name": "openms_msgfplusadapter",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": [\"out_FLAG\"], \"PeptideIndexing\": {\"decoy_string\": \"\", \"decoy_string_position\": \"prefix\", \"missing_decoy_action\": \"warn\", \"write_protein_sequence\": \"false\", \"write_protein_description\": \"false\", \"keep_unreferenced_proteins\": \"false\", \"unmatched_action\": \"error\", \"aaa_max\": \"3\", \"mismatches_max\": \"0\", \"IL_equivalent\": \"false\", \"enzyme\": {\"name\": \"auto\", \"specificity\": \"auto\"}}, \"add_features\": \"true\", \"adv_opts\": {\"add_decoys\": \"false\", \"legacy_conversion\": \"false\", \"force\": \"false\", \"test\": \"False\"}, \"conf\": {\"__class__\": \"RuntimeValue\"}, \"database\": {\"__class__\": \"RuntimeValue\"}, \"enzyme\": \"Trypsin/P\", \"fixed_modifications\": [\"Carbamidomethyl (C)\"], \"fragment_method\": \"HCD\", \"in\": {\"__class__\": \"RuntimeValue\"}, \"instrument\": \"high_res\", \"isotope_error_range\": \"0,1\", \"matches_per_spec\": \"1\", \"max_missed_cleavages\": \"2\", \"max_mods\": \"2\", \"max_peptide_length\": \"40\", \"max_precursor_charge\": \"4\", \"min_peptide_length\": \"6\", \"min_precursor_charge\": \"2\", \"precursor_error_units\": \"ppm\", \"precursor_mass_tolerance\": \"5.0\", \"protocol\": \"none\", \"reindex\": \"true\", \"tasks\": \"0\", \"tryptic\": \"fully\", \"variable_modifications\": [\"Oxidation (M)\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8+galaxy0",
+            "type": "tool",
+            "uuid": "60058dd5-82ac-48f3-a838-415e0a52aa34",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "58f8e71c-a9c4-4622-a7e6-e205456734b5"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_featurefindermultiplex/FeatureFinderMultiplex/2.8+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "in": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FeatureFinderMultiplex",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "featurexml"
+                }
+            ],
+            "position": {
+                "left": 833.9990243403868,
+                "top": 709.985180013984
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_featurefindermultiplex/FeatureFinderMultiplex/2.8+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "9876bda3ec53",
+                "name": "openms_featurefindermultiplex",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": [\"out_FLAG\"], \"adv_opts\": {\"force\": \"false\", \"test\": \"False\"}, \"algorithm\": {\"labels\": \"[]\", \"charge\": \"1:6\", \"isotopes_per_peptide\": \"1:6\", \"rt_typical\": \"40.0\", \"rt_band\": \"0.0\", \"rt_min\": \"2.0\", \"mz_tolerance\": \"6.0\", \"mz_unit\": \"ppm\", \"intensity_cutoff\": \"1000.0\", \"peptide_similarity\": \"0.5\", \"averagine_similarity\": \"0.4\", \"averagine_similarity_scaling\": \"0.95\", \"missed_cleavages\": \"0\", \"spectrum_type\": \"automatic\", \"averagine_type\": \"peptide\", \"knock_out\": \"false\"}, \"in\": {\"__class__\": \"ConnectedValue\"}, \"labels\": {\"Arg6\": \"6.0201290268\", \"Arg10\": \"10.0082686\", \"Lys4\": \"4.0251069836\", \"Lys6\": \"6.0201290268\", \"Lys8\": \"8.0141988132\", \"Leu3\": \"3.01883\", \"Dimethyl0\": \"28.0313\", \"Dimethyl4\": \"32.056407\", \"Dimethyl6\": \"34.063117\", \"Dimethyl8\": \"36.07567\", \"ICPL0\": \"105.021464\", \"ICPL4\": \"109.046571\", \"ICPL6\": \"111.041593\", \"ICPL10\": \"115.0667\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8+galaxy0",
+            "type": "tool",
+            "uuid": "a3e0d551-dea3-465c-852c-e51196351980",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "7ecc1818-c17b-487e-96a9-b2ef19da14eb"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.8+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "fasta": {
+                    "id": 3,
+                    "output_name": "out"
+                },
+                "in": {
+                    "id": 5,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool PeptideIndexer",
+                    "name": "fasta"
+                },
+                {
+                    "description": "runtime parameter for tool PeptideIndexer",
+                    "name": "in"
+                }
+            ],
+            "label": null,
+            "name": "PeptideIndexer",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "idxml"
+                }
+            ],
+            "position": {
+                "left": 833.9990243403868,
+                "top": 96.96748270790954
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.8+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d6aca689dd48",
+                "name": "openms_peptideindexer",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"IL_equivalent\": \"false\", \"OPTIONAL_OUTPUTS\": null, \"aaa_max\": \"3\", \"adv_opts\": {\"force\": \"false\", \"test\": \"False\"}, \"decoy_string\": \"\", \"decoy_string_position\": \"prefix\", \"enzyme\": {\"name\": \"auto\", \"specificity\": \"auto\"}, \"fasta\": {\"__class__\": \"RuntimeValue\"}, \"in\": {\"__class__\": \"RuntimeValue\"}, \"keep_unreferenced_proteins\": \"false\", \"mismatches_max\": \"0\", \"missing_decoy_action\": \"warn\", \"unmatched_action\": \"error\", \"write_protein_description\": \"false\", \"write_protein_sequence\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8+galaxy0",
+            "type": "tool",
+            "uuid": "c4f01048-7e0d-472a-909a-eab3701f5739",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "3f5ecce0-8087-4cd6-b857-328175ec4e59"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.8+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "in": {
+                    "id": 7,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FalseDiscoveryRate",
+                    "name": "in"
+                }
+            ],
+            "label": null,
+            "name": "FalseDiscoveryRate",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "idxml"
+                }
+            ],
+            "position": {
+                "left": 1112.0069379637225,
+                "top": 101.97236552040954
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.8+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "6ccbf9a2072c",
+                "name": "openms_falsediscoveryrate",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"FDR\": {\"PSM\": \"0.01\", \"protein\": \"1.0\", \"cleanup\": {\"remove_proteins_without_psms\": \"true\", \"remove_psms_without_proteins\": \"true\", \"remove_spectra_without_psms\": \"true\"}}, \"OPTIONAL_OUTPUTS\": null, \"PSM\": \"true\", \"adv_opts\": {\"force\": \"false\", \"test\": \"False\"}, \"algorithm\": {\"no_qvalues\": \"false\", \"use_all_hits\": \"false\", \"split_charge_variants\": \"false\", \"treat_runs_separately\": \"false\", \"add_decoy_peptides\": \"false\", \"add_decoy_proteins\": \"false\", \"conservative\": \"true\"}, \"in\": {\"__class__\": \"RuntimeValue\"}, \"protein\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8+galaxy0",
+            "type": "tool",
+            "uuid": "54853153-62f8-4587-8d65-c9f37d4f81c3",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "8e7f8c09-7b4c-41f1-afa1-b5a34fda3cfe"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input_list": {
+                    "id": 8,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Collapse Collection",
+                    "name": "input_list"
+                }
+            ],
+            "label": "Optional output for troubleshooting_1",
+            "name": "Collapse Collection",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1389.9902027739574,
+                "top": 96.96748270790954
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "90981f86000f",
+                "name": "collapse_collections",
+                "owner": "nml",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filename\": {\"add_name\": \"true\", \"__current_case__\": 0, \"place_name\": \"same_multiple\"}, \"input_list\": {\"__class__\": \"RuntimeValue\"}, \"one_header\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.1.0",
+            "type": "tool",
+            "uuid": "b6d603f2-6c6d-473c-a385-88776d6beff1",
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idfilter/IDFilter/2.8+galaxy0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "in": {
+                    "id": 8,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool IDFilter",
+                    "name": "blacklist"
+                },
+                {
+                    "description": "runtime parameter for tool IDFilter",
+                    "name": "blacklist"
+                },
+                {
+                    "description": "runtime parameter for tool IDFilter",
+                    "name": "in"
+                },
+                {
+                    "description": "runtime parameter for tool IDFilter",
+                    "name": "in_silico_digestion"
+                },
+                {
+                    "description": "runtime parameter for tool IDFilter",
+                    "name": "whitelist"
+                },
+                {
+                    "description": "runtime parameter for tool IDFilter",
+                    "name": "whitelist"
+                }
+            ],
+            "label": null,
+            "name": "IDFilter",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1389.9902027739574,
+                "top": 268.95958714231233
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idfilter/IDFilter/2.8+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "a5d785af0ad8",
+                "name": "openms_idfilter",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"adv_opts\": {\"remove_duplicate_psm\": \"false\", \"remove_peptide_hits_by_metavalue\": \"\", \"force\": \"false\", \"test\": \"False\"}, \"best\": {\"n_spectra\": \"0\", \"n_peptide_hits\": \"0\", \"n_protein_hits\": \"0\", \"strict\": \"false\", \"n_to_m_peptide_hits\": \":\"}, \"blacklist\": {\"proteins\": {\"__class__\": \"RuntimeValue\"}, \"protein_accessions\": \"\", \"peptides\": {\"__class__\": \"RuntimeValue\"}, \"ignore_modifications\": \"false\", \"modifications\": null, \"RegEx\": \"\"}, \"delete_unreferenced_peptide_hits\": \"false\", \"in\": {\"__class__\": \"RuntimeValue\"}, \"in_silico_digestion\": {\"fasta\": {\"__class__\": \"RuntimeValue\"}, \"enzyme\": \"Trypsin\", \"specificity\": \"full\", \"missed_cleavages\": \"-1\", \"methionine_cleavage\": \"false\"}, \"keep_unreferenced_protein_hits\": \"false\", \"missed_cleavages\": {\"number_of_missed_cleavages\": \":\", \"enzyme\": \"Trypsin\"}, \"mz\": {\"error\": \"-1.0\", \"unit\": \"ppm\"}, \"precursor\": {\"rt\": \":\", \"mz\": \":\", \"length\": \":\", \"charge\": \":\"}, \"remove_decoys\": \"true\", \"remove_shared_peptides\": \"false\", \"rt\": {\"p_value\": \"0.0\", \"p_value_1st_dim\": \"0.0\"}, \"score\": {\"pep\": \"0.8\", \"prot\": \"1.0\", \"protgroup\": \"0.0\"}, \"var_mods\": \"false\", \"whitelist\": {\"proteins\": {\"__class__\": \"RuntimeValue\"}, \"protein_accessions\": \"\", \"peptides\": {\"__class__\": \"RuntimeValue\"}, \"ignore_modifications\": \"false\", \"modifications\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8+galaxy0",
+            "type": "tool",
+            "uuid": "e218ea23-7f6b-4d51-8121-902fcc8148d6",
+            "workflow_outputs": [
+                {
+                    "label": "IDFilter on input dataset(s): out",
+                    "output_name": "out",
+                    "uuid": "a175f1f8-60d4-4d56-9008-9df3b819fdcf"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "in": {
+                    "id": 10,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool TextExporter",
+                    "name": "in"
+                }
+            ],
+            "label": "Optional output for troubleshooting_2",
+            "name": "TextExporter",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1668.0226749217015,
+                "top": 457.0019513192261
+            },
+            "post_job_actions": {
+                "HideDatasetActionout": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "9020199dba0a",
+                "name": "openms_textexporter",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"consensus\": {\"sorting_method\": \"none\", \"sort_by_maps\": \"false\", \"sort_by_size\": \"false\"}, \"feature\": {\"minimal\": \"false\", \"add_metavalues\": \"-1\"}, \"id\": {\"proteins_only\": \"false\", \"peptides_only\": \"false\", \"protein_groups\": \"false\", \"first_dim_rt\": \"false\", \"add_metavalues\": \"-1\", \"add_hit_metavalues\": \"-1\", \"add_protein_hit_metavalues\": \"-1\"}, \"in\": {\"__class__\": \"RuntimeValue\"}, \"no_ids\": \"false\", \"quoting\": \"none\", \"replacement\": \"_\", \"separator\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "9d640907-175e-4fb5-a487-bea9a02ba240",
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idmapper/IDMapper/2.8+galaxy0",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "id": {
+                    "id": 10,
+                    "output_name": "out"
+                },
+                "in": {
+                    "id": 6,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool IDMapper",
+                    "name": "id"
+                },
+                {
+                    "description": "runtime parameter for tool IDMapper",
+                    "name": "in"
+                },
+                {
+                    "description": "runtime parameter for tool IDMapper",
+                    "name": "spectra"
+                }
+            ],
+            "label": null,
+            "name": "IDMapper",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1668.0226749217015,
+                "top": 608.9989927393444
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idmapper/IDMapper/2.8+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "adca857b4884",
+                "name": "openms_idmapper",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"adv_opts\": {\"ignore_charge\": \"false\", \"force\": \"false\", \"test\": \"False\"}, \"consensus\": {\"use_subelements\": \"false\", \"annotate_ids_with_subelements\": \"false\"}, \"feature\": {\"use_centroid_rt\": \"false\", \"use_centroid_mz\": \"true\"}, \"id\": {\"__class__\": \"RuntimeValue\"}, \"in\": {\"__class__\": \"RuntimeValue\"}, \"mz_measure\": \"ppm\", \"mz_reference\": \"peptide\", \"mz_tolerance\": \"5.0\", \"rt_tolerance\": \"30.0\", \"spectra\": {\"_in\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8+galaxy0",
+            "type": "tool",
+            "uuid": "ebed3bb5-a1ad-4443-bff1-6cff08e5b82c",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out",
+                    "uuid": "e345adeb-bad5-43ea-98f9-734ab8a2f300"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_metaprosip/MetaProSIP/2.8+galaxy0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "in_fasta": {
+                    "id": 3,
+                    "output_name": "out"
+                },
+                "in_featureXML": {
+                    "id": 12,
+                    "output_name": "out"
+                },
+                "in_mzML": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MetaProSIP",
+                    "name": "in_fasta"
+                },
+                {
+                    "description": "runtime parameter for tool MetaProSIP",
+                    "name": "in_featureXML"
+                },
+                {
+                    "description": "runtime parameter for tool MetaProSIP",
+                    "name": "in_mzML"
+                }
+            ],
+            "label": null,
+            "name": "MetaProSIP",
+            "outputs": [
+                {
+                    "name": "out_csv",
+                    "type": "csv"
+                },
+                {
+                    "name": "out_peptide_centric_csv",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "left": 1956.0405347474225,
+                "top": 366.93789690909296
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_csv": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_csv"
+                },
+                "HideDatasetActionout_peptide_centric_csv": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_peptide_centric_csv"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_metaprosip/MetaProSIP/2.8+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "819ed5aae76f",
+                "name": "openms_metaprosip",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"adv_opts\": {\"min_correlation_distance_to_averagine\": \"-1.0\", \"pattern_15N_TIC_threshold\": \"0.95\", \"pattern_13C_TIC_threshold\": \"0.95\", \"pattern_2H_TIC_threshold\": \"0.95\", \"pattern_18O_TIC_threshold\": \"0.95\", \"heatmap_bins\": \"20\", \"observed_peak_fraction\": \"0.5\", \"min_consecutive_isotopes\": \"2\", \"score_plot_yaxis_min\": \"0.0\", \"collect_method\": \"correlation_maximum\", \"lowRIA_correlation_threshold\": \"-1.0\", \"force\": \"false\", \"test\": \"False\"}, \"cluster\": \"false\", \"correlation_threshold\": \"0.5\", \"decomposition_threshold\": \"0.7\", \"filter_monoisotopic\": \"false\", \"in_fasta\": {\"__class__\": \"RuntimeValue\"}, \"in_featureXML\": {\"__class__\": \"RuntimeValue\"}, \"in_mzML\": {\"__class__\": \"RuntimeValue\"}, \"intensity_threshold\": \"1000.0\", \"labeling_element\": \"C\", \"mz_tolerance_ppm\": \"5.0\", \"plot_extension\": \"png\", \"qc_output_directory\": \"\", \"report_natural_peptides\": \"true\", \"rt_tolerance_s\": \"30.0\", \"use_averagine_ids\": \"false\", \"use_unassigned_ids\": \"true\", \"weight_merge_window\": \"5.0\", \"xic_threshold\": \"0.7\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8+galaxy0",
+            "type": "tool",
+            "uuid": "6c9e666e-4fbf-4d5b-9592-333415aa02f8",
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "in": {
+                    "id": 12,
+                    "output_name": "out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool TextExporter",
+                    "name": "in"
+                }
+            ],
+            "label": "Optional output for troubleshooting_3",
+            "name": "TextExporter",
+            "outputs": [
+                {
+                    "name": "out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1956.0405347474225,
+                "top": 711.9822756073178
+            },
+            "post_job_actions": {
+                "HideDatasetActionout": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "9020199dba0a",
+                "name": "openms_textexporter",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"OPTIONAL_OUTPUTS\": null, \"adv_opts_cond\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"consensus\": {\"sorting_method\": \"none\", \"sort_by_maps\": \"false\", \"sort_by_size\": \"false\"}, \"feature\": {\"minimal\": \"false\", \"add_metavalues\": \"-1\"}, \"id\": {\"proteins_only\": \"false\", \"peptides_only\": \"false\", \"protein_groups\": \"false\", \"first_dim_rt\": \"false\", \"add_metavalues\": \"-1\", \"add_hit_metavalues\": \"-1\", \"add_protein_hit_metavalues\": \"-1\"}, \"in\": {\"__class__\": \"RuntimeValue\"}, \"no_ids\": \"false\", \"quoting\": \"none\", \"replacement\": \"_\", \"separator\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6+galaxy0",
+            "type": "tool",
+            "uuid": "47bb67b4-e576-46e8-92d3-c96d7780d895",
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "input_list": {
+                    "id": 13,
+                    "output_name": "out_peptide_centric_csv"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Collapse Collection",
+                    "name": "input_list"
+                }
+            ],
+            "label": "Final output",
+            "name": "Collapse Collection",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2233.998970167171,
+                "top": 423.98915488339026
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "tsv"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "90981f86000f",
+                "name": "collapse_collections",
+                "owner": "nml",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filename\": {\"add_name\": \"true\", \"__current_case__\": 0, \"place_name\": \"same_multiple\"}, \"input_list\": {\"__class__\": \"RuntimeValue\"}, \"one_header\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.1.0",
+            "type": "tool",
+            "uuid": "4a30f335-fad4-430b-8ab8-2f1747dc7459",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "bd5a0c0a-b490-49d1-8aed-469098b28ac7"
+                }
+            ]
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "input_list": {
+                    "id": 13,
+                    "output_name": "out_csv"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Collapse Collection",
+                    "name": "input_list"
+                }
+            ],
+            "label": "Alternative output",
+            "name": "Collapse Collection",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2233.998970167171,
+                "top": 595.9566105046921
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "90981f86000f",
+                "name": "collapse_collections",
+                "owner": "nml",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filename\": {\"add_name\": \"true\", \"__current_case__\": 0, \"place_name\": \"same_once\"}, \"input_list\": {\"__class__\": \"RuntimeValue\"}, \"one_header\": \"true\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.1.0",
+            "type": "tool",
+            "uuid": "4e78538c-4332-4059-a25a-f9901d144481",
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "b8e62627-a476-4c0f-afad-f78fd4fdb2f2",
+    "version": 17
+}
